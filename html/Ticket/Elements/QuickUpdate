@@ -45,7 +45,7 @@
 %# END BPS TAGGED BLOCK }}}
 
 <input type="hidden" class="hidden" name="id" value="<% $Ticket->id %>" />
-<table>
+<table style="float:left;width:45%">
   <tr>
  <td class="label">Status:</td><td> <& /Elements/SelectStatus, Name => 'Status', DefaultLabel => loc("[_1] (Unchanged)", loc($Ticket->Status)) &> </td>
   </tr>
@@ -63,6 +63,17 @@
 <&|/l&>Queue</&>:</td><td> <& /Elements/SelectQueue, Name => 'Queue', Default => $Ticket->QueueObj->Id &>
   </td>
   </tr>
+  <tr>
+    <td class="label"><&|/l&>Due</&>:</td>
+    <td class="entry">
+      <& /Elements/SelectDate, menu_prefix => 'Due', current => 0 &> (<% $Ticket->DueObj->AsString %>)
+    </td>
+  </tr>
+</table>
+<table style="float:left;width:45%">
+<tr>
+  <& /Elements/EditCustomFields, Object => $Ticket, Grouping => 'Basics', InTable => 1 &>
+</tr>
 </table>
 <%INIT>
 my $Ticket = LoadTicket($id);
